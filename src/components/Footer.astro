@@ -1,0 +1,44 @@
+---
+import { organization, namesDiffer, publicLocation } from '../config/organization';
+import Fact from './Fact.astro';
+import Email from './Email.astro';
+
+const year = new Date().getFullYear();
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about/', label: 'About' },
+  { href: '/our-work/', label: 'Our Work' },
+  { href: '/contact/', label: 'Contact' },
+  { href: '/privacy/', label: 'Privacy Notice' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="footer-brand">{organization.brandName}</p>
+      <p>
+        Operated by <Fact value={organization.legalEntityName} field="legalEntityName" />
+      </p>
+      {namesDiffer() && (
+        <p class="footer-note">
+          <Fact value={organization.brandRelationship} field="brandRelationship" />
+        </p>
+      )}
+    </div>
+    <div>
+      <p class="footer-label">Contact</p>
+      <p><Email /></p>
+      <p><Fact value={publicLocation()} field="city/country" /></p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="footer-label">Pages</p>
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+  <div class="container footer-base">
+    <p>&copy; {year} <Fact value={organization.legalEntityName} field="legalEntityName" />. All rights reserved.</p>
+  </div>
+</footer>

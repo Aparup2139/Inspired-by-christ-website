@@ -1,0 +1,48 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# Static site only; no server process runs.
+services:
+  - type: web
+    runtime: static
+    name: inspired-by-christ
+    # audit:content exits non-zero while organization facts are missing or placeholder
+    # text remains, which fails the build so an incomplete site is never deployed.
+    buildCommand: npm ci && npm run build && npm run audit:content
+    staticPublishPath: ./dist
+    autoDeployTrigger: commit
+    # Render adds www.inspired-by-christ.com automatically and redirects it to the root.
+    domains:
+      - inspired-by-christ.com
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+    routes:
+      # Legacy registrar address. Render answers redirects with 301 and only applies
+      # rules when no file exists at the path, so there must be no /lander page in dist.
+      - type: redirect
+        source: /lander
+        destination: /
+      - type: redirect
+        source: /lander/*
+        destination: /
+    headers:
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=31536000
+      - path: /_astro/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable

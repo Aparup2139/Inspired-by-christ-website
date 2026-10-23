@@ -1,0 +1,8 @@
+---
+import { organization } from '../config/organization';
+import Fact from './Fact.astro';
+
+const email = organization.contactEmail?.trim();
+---
+
+{email ? <a class="email" href={`mailto:${email}`}>{email}</a> : <Fact value={null} field="contactEmail" />}

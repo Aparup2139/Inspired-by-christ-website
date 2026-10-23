@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Fact from '../components/Fact.astro';
+import { organization as org, activityStatusLabel } from '../config/organization';
+---
+
+<BaseLayout title="Our Work" description={`What ${org.brandName} does: its current activities and their status.`}>
+  <div class="page-head">
+    <div class="container">
+      <p class="eyebrow">What we do</p>
+      <h1>Our Work</h1>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <p class="lede-dark"><Fact value={org.organizationDescription} field="organizationDescription" /></p>
+    {
+      org.activities.length ? (
+        org.activities.map((a, i) => (
+          <section class="work-item" aria-labelledby={`work-${i}`}>
+            <h2 id={`work-${i}`}>{a.title}</h2>
+            <p class="status">Status: {activityStatusLabel[a.status]}</p>
+            <p>{a.description}</p>
+          </section>
+        ))
+      ) : (
+        <p><Fact value={null} field="activities" /></p>
+      )
+    }
+  </div>
+</BaseLayout>

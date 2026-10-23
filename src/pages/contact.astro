@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Fact from '../components/Fact.astro';
+import Email from '../components/Email.astro';
+import { organization as org, publicLocation } from '../config/organization';
+
+const phone = org.publicPhone?.trim();
+---
+
+<BaseLayout title="Contact" description={`How to contact ${org.brandName} by email, and where the organization is based.`}>
+  <div class="page-head">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1>Contact</h1>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <p>We do not use a contact form. Email is the best way to reach us.</p>
+    <dl class="facts facts-large">
+      <div>
+        <dt>Email</dt>
+        <dd><Email /></dd>
+      </div>
+      <div>
+        <dt>Location</dt>
+        <dd><Fact value={publicLocation()} field="city/country" /></dd>
+      </div>
+      {phone && (
+        <div>
+          <dt>Phone</dt>
+          <dd><a href={`tel:${phone.replace(/[^\d+]/g, '')}`}>{phone}</a></dd>
+        </div>
+      )}
+      <div>
+        <dt>Organization</dt>
+        <dd><Fact value={org.legalEntityName} field="legalEntityName" /></dd>
+      </div>
+    </dl>
+  </div>
+</BaseLayout>

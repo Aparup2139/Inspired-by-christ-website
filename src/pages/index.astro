@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Fact from '../components/Fact.astro';
+import Email from '../components/Email.astro';
+import { organization as org, activityStatusLabel, namesDiffer } from '../config/organization';
+
+const featured = org.activities.slice(0, 3);
+---
+
+<BaseLayout description={`${org.brandName}: who we are, what we do, and how to contact us.`}>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-inner">
+      <p class="eyebrow">{org.brandName}</p>
+      <h1 id="hero-title">Inspired by Faith. Guided by Purpose.</h1>
+      <p class="lede"><Fact value={org.organizationDescription} field="organizationDescription" /></p>
+      <div class="actions">
+        <a class="button button-primary" href="/about/">About us</a>
+        <a class="button button-secondary" href="/our-work/">See our work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="who-title">
+    <div class="container split">
+      <div>
+        <p class="kicker">Who we are</p>
+        <h2 id="who-title">The organization behind {org.brandName}</h2>
+      </div>
+      <div class="prose">
+        <dl class="facts">
+          <div>
+            <dt>Legal name</dt>
+            <dd><Fact value={org.legalEntityName} field="legalEntityName" /></dd>
+          </div>
+          <div>
+            <dt>Legal form</dt>
+            <dd><Fact value={org.legalEntityType} field="legalEntityType" /></dd>
+          </div>
+          {namesDiffer() && (
+            <div>
+              <dt>Relationship to {org.brandName}</dt>
+              <dd><Fact value={org.brandRelationship} field="brandRelationship" /></dd>
+            </div>
+          )}
+        </dl>
+        <p><Fact value={org.mission} field="mission" /></p>
+        <p><a href="/about/">Read more about our organization</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="work-title">
+    <div class="container">
+      <p class="kicker">What we do</p>
+      <h2 id="work-title">Our work</h2>
+      {
+        featured.length ? (
+          <ul class="cards" role="list">
+            {featured.map((a) => (
+              <li class="card">
+                <h3>{a.title}</h3>
+                <p class="status">{activityStatusLabel[a.status]}</p>
+                <p>{a.description}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p><Fact value={null} field="activities" /></p>
+        )
+      }
+      <p><a href="/our-work/">Learn more about our work</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contact-title">
+    <div class="container contact-band">
+      <div>
+        <p class="kicker">Contact</p>
+        <h2 id="contact-title">Get in touch</h2>
+      </div>
+      <div class="prose">
+        <p>The best way to reach us is by email: <Email /></p>
+        <p><a href="/contact/">View all contact details</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

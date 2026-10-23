@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Fact from '../components/Fact.astro';
+import Email from '../components/Email.astro';
+import { organization as org } from '../config/organization';
+
+// Update this date whenever the notice or the website's data practices change.
+const lastUpdated = '24 October 2026';
+---
+
+<BaseLayout title="Privacy Notice" description={`How the ${org.brandName} website handles information about visitors.`}>
+  <div class="page-head">
+    <div class="container">
+      <p class="eyebrow">Privacy</p>
+      <h1>Privacy Notice</h1>
+    </div>
+  </div>
+
+  <div class="container page-body prose">
+    <p>Last updated: {lastUpdated}</p>
+    <p>
+      This notice explains what happens to information when you visit {org.domain}. It covers this website only.
+    </p>
+
+    <section aria-labelledby="who">
+      <h2 id="who">Who is responsible</h2>
+      <p>
+        This website is operated by <Fact value={org.legalEntityName} field="legalEntityName" />. You can contact
+        us about privacy at <Email />.
+      </p>
+    </section>
+
+    <section aria-labelledby="not-collected">
+      <h2 id="not-collected">What this website does not do</h2>
+      <ul>
+        <li>It does not set cookies.</li>
+        <li>It does not use analytics, advertising, or tracking scripts.</li>
+        <li>It has no forms, accounts, or sign-ups, so it does not ask you for personal information.</li>
+        <li>It does not load fonts, scripts, or other content from third-party services.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="hosting">
+      <h2 id="hosting">Information processed by our hosting provider</h2>
+      <p>
+        The website is hosted by Render. As with any website, when your browser requests a page it sends technical
+        information to the server, such as your IP address, the page requested, the date and time, and your browser
+        type. Render processes this information to deliver the website, keep it secure, and protect it against abuse,
+        and may keep it in its own logs. Render's handling of this information is described in the
+        <a href="https://render.com/privacy" rel="noopener noreferrer">Render Privacy Policy</a>.
+      </p>
+    </section>
+
+    <section aria-labelledby="email">
+      <h2 id="email">If you email us</h2>
+      <p>
+        If you write to us, we receive your email address and whatever you include in your message. We use it to read
+        and reply to your message. Please do not send sensitive personal information by email.
+      </p>
+    </section>
+
+    <section aria-labelledby="questions">
+      <h2 id="questions">Questions and requests</h2>
+      <p>
+        To ask what information we hold about you from correspondence, or to ask us to delete it, email <Email />.
+      </p>
+    </section>
+
+    <section aria-labelledby="changes">
+      <h2 id="changes">Changes to this notice</h2>
+      <p>If the website's practices change, we will update this page and the date above.</p>
+    </section>
+  </div>
+</BaseLayout>

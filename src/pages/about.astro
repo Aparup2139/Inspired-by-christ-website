@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Fact from '../components/Fact.astro';
+import { organization as org, namesDiffer, publicLocation } from '../config/organization';
+---
+
+<BaseLayout title="About Us" description={`About ${org.brandName}: the organization that operates it, its mission, and its background.`}>
+  <div class="page-head">
+    <div class="container">
+      <p class="eyebrow">About</p>
+      <h1>About Us</h1>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <section aria-labelledby="overview">
+      <h2 id="overview">Overview</h2>
+      <p><Fact value={org.organizationDescription} field="organizationDescription" /></p>
+    </section>
+
+    <section aria-labelledby="identity">
+      <h2 id="identity">Legal identity</h2>
+      <dl class="facts">
+        <div>
+          <dt>Registered legal name</dt>
+          <dd><Fact value={org.legalEntityName} field="legalEntityName" /></dd>
+        </div>
+        <div>
+          <dt>Legal form</dt>
+          <dd><Fact value={org.legalEntityType} field="legalEntityType" /></dd>
+        </div>
+        <div>
+          <dt>Relationship to {org.brandName}</dt>
+          <dd>
+            {
+              namesDiffer() ? (
+                <Fact value={org.brandRelationship} field="brandRelationship" />
+              ) : (
+                org.brandRelationship ?? `${org.brandName} is the registered name of the organization.`
+              )
+            }
+          </dd>
+        </div>
+        <div>
+          <dt>Location</dt>
+          <dd><Fact value={publicLocation()} field="city/country" /></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="mission">
+      <h2 id="mission">Mission</h2>
+      <p><Fact value={org.mission} field="mission" /></p>
+    </section>
+
+    <section aria-labelledby="background">
+      <h2 id="background">Background</h2>
+      <p><Fact value={org.organizationBackground} field="organizationBackground" /></p>
+    </section>
+  </div>
+</BaseLayout>

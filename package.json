@@ -1,0 +1,37 @@
+{
+  "name": "inspired-by-christ",
+  "version": "1.0.0",
+  "description": "Static organization website for Inspired by Christ (inspired-by-christ.com).",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --port 4321",
+    "lint": "eslint .",
+    "typecheck": "astro check",
+    "test": "node --test \"tests/unit/*.test.ts\"",
+    "test:e2e": "playwright test",
+    "audit:content": "node scripts/audit-content.ts",
+    "audit:live": "node scripts/audit-live.ts",
+    "build:release": "npm run build && npm run audit:content"
+  },
+  "type": "module",
+  "dependencies": {
+    "astro": "^7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.13.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "globals": "^17.13.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.0"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.23.4"
+  }
+}

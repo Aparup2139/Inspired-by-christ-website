@@ -1,0 +1,13 @@
+---
+// Renders a configured organization fact, or a visible "Content required" notice
+// when it is not configured. The notice fails `npm run audit:content`.
+import { MISSING_MARKER } from '../../scripts/lib/checks.ts';
+
+interface Props {
+  value: string | null | undefined;
+  field: string;
+}
+const { value, field } = Astro.props;
+---
+
+{value?.trim() ? value : <span class="missing" data-missing={field}>{MISSING_MARKER}: {field}</span>}
