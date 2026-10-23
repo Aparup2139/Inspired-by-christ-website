@@ -70,6 +70,8 @@ test('placeholder patterns', () => {
   assert.deepEqual(findPlaceholders('Our site is Under Construction'), ['Under Construction']);
   assert.ok(findPlaceholders('Content required: mission').length);
   assert.ok(findPlaceholders('[Company Name] builds apps').includes('[Company Name]'));
+  assert.ok(findPlaceholders('[Sample] Registered Legal Name').length);
+  assert.ok(findPlaceholders('replace-me@inspired-by-christ.com').length);
   assert.deepEqual(findPlaceholders('A calm app for daily reading, available today.'), []);
   assert.deepEqual(findPlaceholders('A mastodon toddler'), []);
 });

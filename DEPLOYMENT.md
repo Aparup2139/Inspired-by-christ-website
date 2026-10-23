@@ -13,6 +13,8 @@ References (check them; details can change):
 
 > **The Render build fails until the content in [CONTENT_REQUIRED.md](CONTENT_REQUIRED.md) is supplied.** This is deliberate: the build command runs `npm run audit:content`, so an incomplete site cannot go live. Complete the content first and preview it locally with `npm run build && npm run preview`.
 
+**Preview builds with `[Sample]` placeholders:** add the Render environment variable `ALLOW_PLACEHOLDER_CONTENT=true`. The audit then reports the problems but lets the build pass. **Delete that variable before connecting the custom domain or applying to Apple.** Without it, the build fails until every placeholder is replaced.
+
 ## 1. Push the repository to GitHub
 
 ```bash

@@ -17,6 +17,7 @@ export const PLACEHOLDER_PATTERNS: { label: string; re: RegExp }[] = [
   { label: 'Example Organization', re: /\bexample\s+(organi[sz]ation|company|inc)\b/i },
   { label: 'Your Organization', re: /\byour\s+(organi[sz]ation|company)\s+name\b/i },
   { label: 'Content required marker', re: new RegExp(MISSING_MARKER, 'i') },
+  { label: '[Sample] placeholder', re: /\[sample\]|replace-me@/i },
 ];
 
 export function findPlaceholders(text: string): string[] {

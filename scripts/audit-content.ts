@@ -60,6 +60,11 @@ for (const p of passes) console.log(`PASS  ${p}`);
 for (const w of warnings) console.log(`WARN  ${w}`);
 for (const f of failures) console.log(`FAIL  ${f}`);
 console.log(`\n${passes.length} passed, ${failures.length} failed, ${warnings.length} warnings.`);
+if (failures.length && process.env.ALLOW_PLACEHOLDER_CONTENT === 'true') {
+  // Preview builds only. Remove the env var before connecting the domain or applying to Apple.
+  console.log('ALLOW_PLACEHOLDER_CONTENT=true: placeholder content allowed for a PREVIEW build. NOT release-ready.');
+  process.exit(0);
+}
 if (failures.length) {
   console.log('Content audit FAILED: the site is not release-ready. Supply the facts listed in CONTENT_REQUIRED.md.');
   process.exit(1);
