@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const port = 4321;
+// Not 4321: that is `astro dev`'s port, and reusing a running dev server would test unbuilt code.
+const port = 4322;
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -15,7 +16,7 @@ export default defineConfig({
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   // Tests run against the production build served by `astro preview`, not the dev server.
   webServer: {
-    command: 'npm run build && npm run preview',
+    command: `npm run build && npx astro preview --port ${port}`,
     url: `http://localhost:${port}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

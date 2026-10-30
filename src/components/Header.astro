@@ -18,8 +18,13 @@ const { logo } = organization;
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/">
-      {logo && <img src={logo.src} alt="" width={logo.width} height={logo.height} />}
-      <span>{organization.brandName}</span>
+      {
+        logo ? (
+          <img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
+        ) : (
+          <span>{organization.brandName}</span>
+        )
+      }
     </a>
     <!-- Shown only when /js/menu.js runs; without JavaScript the links are always visible. -->
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>

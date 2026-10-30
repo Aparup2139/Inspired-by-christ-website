@@ -62,26 +62,31 @@ export interface Organization {
 export const organization: Organization = {
   brandName: 'Inspired by Christ',
   domain: 'inspired-by-christ.com',
-  // [Sample] values are placeholders: replace every one with real facts before launch.
-  legalEntityName: '[Sample] Registered Legal Name',
-  legalEntityType: '[Sample] Legal form and country of registration',
-  brandRelationship: '[Sample] Inspired by Christ is a brand operated by the registered legal entity named above.',
-  organizationDescription: '[Sample] One or two sentences describing what the organization actually does.',
-  mission: "[Sample] The organization's mission, in its own words.",
-  organizationBackground: '[Sample] When and why the organization was formed, and what it has done so far.',
+  // Sources: D-U-N-S business record, business card, and the "Are you bold in your faith?" statement.
+  legalEntityName: 'Inspired By Christ Inc',
+  legalEntityType: 'Corporation with its registered address in Sheridan, Wyoming, United States',
+  brandRelationship: 'Inspired by Christ is the brand of Inspired By Christ Inc.',
+  organizationDescription:
+    'Inspired by Christ is a Christian faith brand for people who are bold in their faith and strong believers in the body of Christ. Its message is simple: be bold in your faith.',
+  mission:
+    'Our mission is to touch lives, inspire people to walk in their faith, and encourage believers to be bold in building up their faith.',
+  organizationBackground:
+    'Inspired by Christ was created for people who are bold in their faith and are not ashamed to express their love for Christ. The brand stands for boldness, faith, unity, and believers in Christ. God does not separate us or treat us differently based on race, gender, denomination, or country, and Inspired by Christ welcomes all believers as brothers and sisters, one in Christ.',
   activities: [
     {
-      title: '[Sample] Activity name',
-      description: '[Sample] What this product, service, or project actually does.',
-      status: 'in-development',
+      title: 'Faith-inspired apparel',
+      description:
+        'Clothing that carries the Inspired by Christ design, whose bold lettering is modeled on the cover of the Holy Bible, so that what believers wear reflects what they believe.',
+      status: 'active',
     },
   ],
-  contactEmail: 'replace-me@inspired-by-christ.com',
+  contactEmail: 'info@inspired-by-christ.com',
   controlledEmailDomains: [],
-  city: '[Sample] City',
-  country: '[Sample] Country',
+  city: 'Sheridan, Wyoming',
+  country: 'United States',
   publicPhone: null,
-  logo: null,
+  // Header mark (no URL line). The full logo with URL is /assets/logo.png (738x524).
+  logo: { src: '/assets/logo-mark.png', alt: 'Inspired by Christ', width: 193, height: 112 },
 };
 
 export const siteUrl = `https://${organization.domain}`;

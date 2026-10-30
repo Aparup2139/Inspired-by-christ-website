@@ -10,12 +10,17 @@ const featured = org.activities.slice(0, 3);
 <BaseLayout description={`${org.brandName}: who we are, what we do, and how to contact us.`}>
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
-      <p class="eyebrow">{org.brandName}</p>
-      <h1 id="hero-title">Inspired by Faith. Guided by Purpose.</h1>
-      <p class="lede"><Fact value={org.organizationDescription} field="organizationDescription" /></p>
-      <div class="actions">
-        <a class="button button-primary" href="/about/">About us</a>
-        <a class="button button-secondary" href="/our-work/">See our work</a>
+      <div class="hero-logo">
+        <img src="/assets/logo.png" alt={`${org.brandName} logo`} width="738" height="524" fetchpriority="high" />
+      </div>
+      <div class="hero-text">
+        <p class="eyebrow">Be bold in your faith</p>
+        <h1 id="hero-title">Inspired by Faith. Guided by Purpose.</h1>
+        <p class="lede"><Fact value={org.organizationDescription} field="organizationDescription" /></p>
+        <div class="actions">
+          <a class="button button-primary" href="/about/">About us</a>
+          <a class="button button-secondary" href="/our-work/">See our work</a>
+        </div>
       </div>
     </div>
   </section>
