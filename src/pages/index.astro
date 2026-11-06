@@ -25,6 +25,31 @@ const featured = org.activities.slice(0, 3);
     </div>
   </section>
 
+  {
+    (org.appStoreUrl || org.googlePlayUrl) && (
+      <section class="app-band" aria-labelledby="app-title">
+        <div class="container app-inner">
+          <div>
+            <p class="kicker">Our app</p>
+            <h2 id="app-title">Download our app</h2>
+          </div>
+          <div class="actions">
+            {org.appStoreUrl && (
+              <a class="button button-primary" href={org.appStoreUrl} rel="noopener noreferrer">
+                Download on the App Store
+              </a>
+            )}
+            {org.googlePlayUrl && (
+              <a class="button button-secondary" href={org.googlePlayUrl} rel="noopener noreferrer">
+                Get it on Google Play
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <section class="section" aria-labelledby="who-title">
     <div class="container split">
       <div>

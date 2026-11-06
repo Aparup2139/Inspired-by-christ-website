@@ -2,6 +2,7 @@
 import { organization, namesDiffer, publicLocation } from '../config/organization';
 import Fact from './Fact.astro';
 import Email from './Email.astro';
+import SocialLinks from './SocialLinks.astro';
 
 const year = new Date().getFullYear();
 const links = [
@@ -30,6 +31,8 @@ const links = [
       <p class="footer-label">Contact</p>
       <p><Email /></p>
       <p><Fact value={publicLocation()} field="city/country" /></p>
+      {organization.socialLinks.length > 0 && <p class="footer-label">Follow us</p>}
+      <SocialLinks />
     </div>
     <nav aria-label="Footer">
       <p class="footer-label">Pages</p>

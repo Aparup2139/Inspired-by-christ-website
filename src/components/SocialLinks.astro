@@ -1,0 +1,17 @@
+---
+import { organization } from '../config/organization';
+---
+
+{
+  organization.socialLinks.length > 0 && (
+    <ul class="social-links">
+      {organization.socialLinks.map((s) => (
+        <li>
+          <a href={s.href} rel="noopener noreferrer">
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

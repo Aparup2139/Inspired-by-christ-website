@@ -28,6 +28,9 @@ const complete: Organization = {
   country: 'India',
   publicPhone: null,
   logo: null,
+  socialLinks: [],
+  appStoreUrl: null,
+  googlePlayUrl: null,
 };
 const fields = (org: Organization) => validateOrganization(org).map((i) => i.field);
 
@@ -43,6 +46,9 @@ test('missing essential facts are reported', () => {
 test('relationship is required only when names differ', () => {
   assert.ok(fields({ ...complete, brandRelationship: null }).includes('brandRelationship'));
   assert.ok(!fields({ ...complete, legalEntityName: 'Inspired By Christ', brandRelationship: null }).includes('brandRelationship'));
+  // A corporate suffix alone does not make the names differ.
+  assert.ok(!fields({ ...complete, legalEntityName: 'INSPIRED BY CHRIST INC', brandRelationship: null }).includes('brandRelationship'));
+  assert.ok(!fields({ ...complete, legalEntityName: 'Inspired by Christ, LLC', brandRelationship: null }).includes('brandRelationship'));
 });
 
 test('placeholder, trivial, and duplicated text is rejected', () => {

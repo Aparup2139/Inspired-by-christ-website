@@ -354,6 +354,24 @@ img {
   background: rgb(255 255 255 / 0.06);
 }
 
+/* App download band */
+.app-band {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.app-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 3rem;
+}
+.app-inner h2,
+.app-inner .actions {
+  margin: 0;
+}
+
 /* Sections */
 .section {
   padding-block: var(--space);
@@ -507,6 +525,19 @@ img {
   display: inline-block;
   padding-block: 0.3rem;
 }
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.social-links a {
+  display: inline-block;
+  padding-block: 0.3rem;
+}
+
 .footer-base {
   margin-top: 2.5rem;
   padding-block: 1.5rem;

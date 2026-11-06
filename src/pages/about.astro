@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Fact from '../components/Fact.astro';
 import { organization as org, namesDiffer, publicLocation } from '../config/organization';
+
+// Blank lines in the config separate paragraphs.
+const background = (org.organizationBackground ?? '').split(/\n\s*\n/).filter((p) => p.trim());
 ---
 
 <BaseLayout title="About Us" description={`About ${org.brandName}: the organization that operates it, its mission, and its background.`}>
@@ -29,18 +32,12 @@ import { organization as org, namesDiffer, publicLocation } from '../config/orga
           <dt>Legal form</dt>
           <dd><Fact value={org.legalEntityType} field="legalEntityType" /></dd>
         </div>
-        <div>
-          <dt>Relationship to {org.brandName}</dt>
-          <dd>
-            {
-              namesDiffer() ? (
-                <Fact value={org.brandRelationship} field="brandRelationship" />
-              ) : (
-                org.brandRelationship ?? `${org.brandName} is the registered name of the organization.`
-              )
-            }
-          </dd>
-        </div>
+        {namesDiffer() && (
+          <div>
+            <dt>Relationship to {org.brandName}</dt>
+            <dd><Fact value={org.brandRelationship} field="brandRelationship" /></dd>
+          </div>
+        )}
         <div>
           <dt>Location</dt>
           <dd><Fact value={publicLocation()} field="city/country" /></dd>
@@ -55,7 +52,13 @@ import { organization as org, namesDiffer, publicLocation } from '../config/orga
 
     <section aria-labelledby="background">
       <h2 id="background">Background</h2>
-      <p><Fact value={org.organizationBackground} field="organizationBackground" /></p>
+      {
+        background.length ? (
+          background.map((para) => <p>{para}</p>)
+        ) : (
+          <p><Fact value={null} field="organizationBackground" /></p>
+        )
+      }
     </section>
   </div>
 </BaseLayout>

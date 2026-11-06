@@ -57,36 +57,51 @@ export interface Organization {
   publicPhone: string | null;
   /** Optional genuine brand asset. */
   logo: Logo | null;
+  /** Official social profiles (full https URLs). */
+  socialLinks: { label: string; href: string }[];
+  /** Public store listings. The "Download our app" section shows only the ones that are set. */
+  appStoreUrl: string | null;
+  googlePlayUrl: string | null;
 }
 
 export const organization: Organization = {
   brandName: 'Inspired by Christ',
   domain: 'inspired-by-christ.com',
-  // Sources: D-U-N-S business record, business card, and the "Are you bold in your faith?" statement.
-  legalEntityName: 'Inspired By Christ Inc',
+  // Sources: D-U-N-S business record, business card, and text supplied by the organization.
+  legalEntityName: 'INSPIRED BY CHRIST INC',
   legalEntityType: 'Corporation with its registered address in Sheridan, Wyoming, United States',
-  brandRelationship: 'Inspired by Christ is the brand of Inspired By Christ Inc.',
+  // Not needed: the legal name is the brand name plus "Inc" (see namesDiffer).
+  brandRelationship: null,
   organizationDescription:
-    'Inspired by Christ is a Christian faith brand for people who are bold in their faith and strong believers in the body of Christ. Its message is simple: be bold in your faith.',
+    'Founded in 2012, Inspired by Christ is a worldwide, Christ-centered brand and live-streaming platform that brings believers of all denominations together through faith, boldness, and unity. Unashamed to express their love for Jesus Christ, members can connect through live streaming, podcasts, interactive Bible study chats, and other engaging features designed to inspire, strengthen faith, and build a global community united as one family in Christ, regardless of race, gender, nationality, or denomination.',
   mission:
-    'Our mission is to touch lives, inspire people to walk in their faith, and encourage believers to be bold in building up their faith.',
+    'Our mission is to create a worldwide, Christ-centered platform for believers of all denominations to unite, inspire one another, grow in faith, and boldly express their love for Jesus Christ.',
+  // Blank lines separate paragraphs on the About page.
   organizationBackground:
-    'Inspired by Christ was created for people who are bold in their faith and are not ashamed to express their love for Christ. The brand stands for boldness, faith, unity, and believers in Christ. God does not separate us or treat us differently based on race, gender, denomination, or country, and Inspired by Christ welcomes all believers as brothers and sisters, one in Christ.',
+    'Inspired by Christ was created in 2012 for people who are bold in their faith and unashamed to express their love for Christ.\n\n' +
+    'The brand represents boldness, faith, unity, and a shared love for Jesus Christ. We believe that God does not separate us or treat us differently based on race, gender, denomination, or nationality. In His eyes, we are all equal.\n\n' +
+    'Inspired by Christ welcomes all believers as brothers and sisters in Christ, united by one faith and one love for Him.',
   activities: [
     {
       title: 'Faith-inspired apparel',
       description:
-        'Clothing that carries the Inspired by Christ design, whose bold lettering is modeled on the cover of the Holy Bible, so that what believers wear reflects what they believe.',
+        'Inspired by Christ is a Christian faith-based apparel brand for believers who are bold in their faith and unashamed to express their love for Jesus Christ. Our message is simple: Be Bold in Your Faith. Featuring bold lettering inspired by the cover of the Holy Bible, our apparel allows believers to wear their faith proudly. Every purchase helps support and sustain sober living homes, group homes, and housing initiatives for veterans, making a difference in the lives of others through faith, unity, and giving.',
       status: 'active',
     },
   ],
-  contactEmail: 'info@inspired-by-christ.com',
+  contactEmail: 'help@inspired-by-christ.com',
   controlledEmailDomains: [],
   city: 'Sheridan, Wyoming',
   country: 'United States',
   publicPhone: null,
   // Header mark (no URL line). The full logo with URL is /assets/logo.png (738x524).
   logo: { src: '/assets/logo-mark.png', alt: 'Inspired by Christ', width: 193, height: 112 },
+  socialLinks: [
+    { label: 'Instagram', href: 'https://www.instagram.com/_inspiredbychrist_/' },
+    { label: 'Facebook', href: 'https://www.facebook.com/inspiredbychrist.est2012' },
+  ],
+  appStoreUrl: null,
+  googlePlayUrl: null,
 };
 
 export const siteUrl = `https://${organization.domain}`;
@@ -107,9 +122,13 @@ export function publicLocation(org: Organization = organization): string | null 
   return parts.length ? parts.join(', ') : null;
 }
 
-/** True when the legal entity name differs from the brand name. */
+/** True when the legal entity name differs from the brand name, ignoring a corporate suffix. */
 export function namesDiffer(org: Organization = organization): boolean {
   if (!org.legalEntityName) return true;
-  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const norm = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[,.\s]+(inc|incorporated|llc|ltd|limited|corp|corporation|co)\.?$/, '')
+      .replace(/[^a-z0-9]/g, '');
   return norm(org.legalEntityName) !== norm(org.brandName);
 }
