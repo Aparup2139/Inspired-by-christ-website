@@ -260,16 +260,35 @@ img {
   border-bottom: 1px solid var(--line);
 }
 .hero-inner {
-  display: grid;
-  place-items: center;
-  padding-block: clamp(3rem, 8vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-block: clamp(3.5rem, 8vw, 5.5rem) 0;
 }
 .hero-logo {
   margin: 0;
 }
 .hero-logo img {
-  width: min(100%, 640px);
+  width: min(100%, 560px);
   margin-inline: auto;
+}
+.hero-motto {
+  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  line-height: 1.2;
+  color: var(--text);
+}
+/* A red stem, like the cross in the logo, leading into the page. */
+.hero-motto::after {
+  content: '';
+  display: block;
+  width: 2px;
+  height: clamp(3rem, 7vw, 4.5rem);
+  margin: clamp(1.5rem, 3.5vw, 2.25rem) auto 0;
+  background: linear-gradient(var(--red), transparent);
 }
 .page-head h1::after {
   content: '';
