@@ -3,7 +3,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { organization, publicPaths, siteUrl } from '../../src/config/organization.ts';
 
 const expectedH1: Record<string, string> = {
-  '/': 'Inspired by Faith. Guided by Purpose.',
+  '/': organization.brandName, // the logo image is the heading
   '/about/': 'About Us',
   '/our-work/': 'Our Work',
   '/contact/': 'Contact',
@@ -26,7 +26,7 @@ for (const path of publicPaths) {
 
     await expect(page).toHaveTitle(new RegExp(organization.brandName));
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('h1')).toHaveText(expectedH1[path]);
+    await expect(page.locator('h1')).toHaveAccessibleName(expectedH1[path]);
     await expect(page.locator('h1')).toBeVisible();
 
     await expect(page.locator('header')).toHaveCount(1);
@@ -74,7 +74,7 @@ test('header navigation links reach each page', async ({ page }) => {
   ]) {
     await nav.getByRole('link', { name, exact: true }).click();
     await expect(page).toHaveURL(path);
-    await expect(page.locator('h1')).toHaveText(expectedH1[path]);
+    await expect(page.locator('h1')).toHaveAccessibleName(expectedH1[path]);
     await expect(nav.getByRole('link', { name, exact: true })).toHaveAttribute('aria-current', 'page');
   }
 });
@@ -90,7 +90,7 @@ test('footer links reach each page', async ({ page }) => {
     await page.goto('/contact/');
     await page.getByRole('contentinfo').getByRole('link', { name, exact: true }).click();
     await expect(page).toHaveURL(path);
-    await expect(page.locator('h1')).toHaveText(expectedH1[path]);
+    await expect(page.locator('h1')).toHaveAccessibleName(expectedH1[path]);
   }
 });
 
