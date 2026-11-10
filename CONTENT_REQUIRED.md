@@ -40,7 +40,7 @@ The website is built, but it will not deploy until these facts are supplied. Eac
 ## Also review before launch
 
 - [src/pages/privacy.astro](src/pages/privacy.astro): the privacy notice describes the site as built (no cookies, no analytics, no forms, hosted on Render). If you add anything that collects data, update the notice and its date.
-- The homepage heading "Inspired by Faith. Guided by Purpose." is a slogan from the brief. Change it if it does not suit the organization.
+- The homepage motto uses "Be bold in your faith", the organization's own slogan. The homepage title is just the brand name.
 
 ## Check your work
 

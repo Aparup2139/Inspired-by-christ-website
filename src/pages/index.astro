@@ -5,7 +5,7 @@ import Email from '../components/Email.astro';
 import { organization as org, namesDiffer } from '../config/organization';
 ---
 
-<BaseLayout description={`${org.brandName}: who we are, what we do, and how to contact us.`}>
+<BaseLayout description={org.mission ?? `${org.brandName}: who we are, what we do, and how to contact us.`}>
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
       <h1 id="hero-title" class="hero-logo">
